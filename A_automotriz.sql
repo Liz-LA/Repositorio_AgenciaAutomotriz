@@ -1,3 +1,7 @@
+CREATE DATABASE A_automotriz;
+USE A_automotriz;
+a_automotriza_automotriz
+
 CREATE TABLE Usuarios (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     Nombre VARCHAR(255) NOT NULL,
@@ -6,25 +10,26 @@ CREATE TABLE Usuarios (
     Fechadenacimiento DATE,
     Rfc VARCHAR(15) UNIQUE,
     NombreUsuario VARCHAR(50) NOT NULL UNIQUE,
-    Clave VARCHAR(255) NOT NULL  -- Se recomienda almacenar la clave encriptada
+    Clave VARCHAR(255) NOT NULL,  -- Se recomienda almacenar la clave encriptada
+    Rol VARCHAR(50)
 );
 
-
 create table Productos(
-Codigo_Barras varchar(20) primary key not null,
+Codigo_Barras int primary key not null,
 Nombre varchar(255),
 Descripcion varchar(255),
 Marca varchar(255));
 
-
+DROP TABLE productos;
 
 create table Herramientas(
-Codigo_Herramienta varchar(50) primary key not null,
+Codigo_Herramienta int primary key not null,
 Nombre varchar(255),
 Medida varchar(50),
 Marca varchar(50),
 Descripcion varchar(255));
 
+DROP TABLE herramientas;
 
 CREATE TABLE Permisos (
     idPermiso INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -38,7 +43,8 @@ CREATE TABLE Permisos (
     FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
 );
 
------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
+
 Procedures de la tabla usuarios 
 
 DELIMITER //
@@ -53,7 +59,8 @@ CREATE PROCEDURE p_insertar_usuario
     IN _fechanacimiento DATE,
     IN _rfc VARCHAR(15),
     IN _nombreUsuario VARCHAR(50),
-    IN _clave VARCHAR(255)
+    IN _clave VARCHAR(255),
+    IN _rol VARCHAR(255)
 )
 BEGIN
     DECLARE exit handler for sqlexception
@@ -65,15 +72,15 @@ BEGIN
     START TRANSACTION;
 
     -- Inserta el nuevo usuario
-    INSERT INTO Usuarios (Nombre, Apellidop, Apellidom, Fechadenacimiento, Rfc, NombreUsuario, Clave)
-    VALUES (_nombre, _apellidop, _apellidom, _fechanacimiento, _rfc, _nombreUsuario, _clave);
+    INSERT INTO Usuarios (Nombre, Apellidop, Apellidom, Fechadenacimiento, Rfc, NombreUsuario, Clave, Rol)
+    VALUES (_nombre, _apellidop, _apellidom, _fechanacimiento, _rfc, _nombreUsuario, _clave, _rol);
 
     COMMIT;
 END //
 
 DELIMITER ;
 
-DELIMITER //
+
 
 DROP PROCEDURE IF EXISTS p_eliminar_usuario;
 
@@ -98,6 +105,8 @@ END //
 
 DELIMITER ;
 
+
+
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS p_modificar_usuario;
@@ -111,7 +120,8 @@ CREATE PROCEDURE p_modificar_usuario
     IN _fechanacimiento DATE,
     IN _rfc VARCHAR(15),
     IN _nombreUsuario VARCHAR(50),
-    IN _clave VARCHAR(255)
+    IN _clave VARCHAR(255),
+    IN _rol VARCHAR(50)  -- Se agregó el parámetro del Rol
 )
 BEGIN
     DECLARE exit handler for sqlexception
@@ -131,13 +141,15 @@ BEGIN
         Fechadenacimiento = _fechanacimiento,
         Rfc = _rfc,
         NombreUsuario = _nombreUsuario,
-        Clave = _clave  -- Asegúrate de que la clave esté encriptada
+        Clave = _clave,  -- Asegúrate de que la clave esté encriptada
+        Rol = _rol  -- Se agregó la actualización del Rol
     WHERE idUsuario = _idUsuario;
 
     COMMIT;
 END //
 
 DELIMITER ;
+
 
 -----------------------------------------------------------------------------------------
 Procedures de la tabla productos 
@@ -226,7 +238,7 @@ END //
 
 DELIMITER ;
 
------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 Procedimientos de la tabla Herramientas
 
 DELIMITER //
@@ -321,28 +333,60 @@ DELIMITER ;
 
 ------------------------------------------------------------------------------------------
 DELIMITER //
-
-DROP PROCEDURE IF EXISTS p_validar_usuario;
-
-CREATE PROCEDURE p_validar_usuario
+DROP PROCEDURE IF EXISTS p_Validar;
+CREATE PROCEDURE p_Validar
 (
-    IN _nombreUsuario VARCHAR(50),
-    IN _clave VARCHAR(255)
+	IN _NombreUsuario VARCHAR(50),
+	IN _Clave VARCHAR(255)
+	
 )
 BEGIN 
-    DECLARE x INT;
 
-    -- Comparar el nombre de usuario y la clave
-    SELECT COUNT(*) INTO x
-    FROM Usuarios
-    WHERE NombreUsuario = _nombreUsuario AND Clave = _clave;  -- Asegúrate de que _clave esté encriptada al llamarlo
-
-    IF x > 0 THEN
-        SELECT 'correcto' AS rs;
-    ELSE
-        SELECT 'error' AS rs;
-    END IF;
+	DECLARE x INT;
+	SELECT COUNT(*) INTO x FROM usuarios WHERE NombreUsuario= _NombreUsuario AND Clave = _Clave;
+	if X > 0 then
+	
+		SELECT 'C0rr3ct0' AS rs,(SELECT rol FROM usuarios WHERE NombreUsuario = _NombreUsuario) AS rol;
+		
+	ELSE  
+	
+		SELECT 'Error' AS rs, 0 AS rol;
+		
+	end if;
+	
 END //
 
 DELIMITER ;
 
+
+CALL p_Validar('liz',SHA1('123'));
+CALL p_Validar('ana',SHA1('123'));
+
+
+-- ---------------------------------------------------
+
+CALL p_insertar_usuario(
+    'Lizbeth',
+    'Lopez',
+    'Abundiz',
+    '1995-06-12',  
+    'LIZL9506',  
+    'liz',
+    SHA1('123'),
+    'superusuario'
+);
+
+CALL p_insertar_usuario(
+    'Ana',
+    'Santos',
+    'Pedroza',
+    '1995-06-12',  
+    'RTCVL9506',  
+    'ana',
+    SHA1('123'),
+    'usuario'
+);
+
+
+
+SELECT * FROM usuarios;

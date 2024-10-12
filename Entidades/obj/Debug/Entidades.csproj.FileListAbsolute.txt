@@ -1,0 +1,6 @@
+F:\Agencia_Automotriz\Entidades\bin\Debug\Entidades.dll
+F:\Agencia_Automotriz\Entidades\bin\Debug\Entidades.pdb
+F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.csproj.AssemblyReference.cache
+F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
+F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.dll
+F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.pdb
