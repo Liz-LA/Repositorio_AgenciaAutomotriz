@@ -42,6 +42,7 @@
             this.dtgvUsuarios.RowHeadersWidth = 62;
             this.dtgvUsuarios.Size = new System.Drawing.Size(683, 316);
             this.dtgvUsuarios.TabIndex = 1;
+            this.dtgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvUsuarios_CellClick);
             // 
             // label1
             // 

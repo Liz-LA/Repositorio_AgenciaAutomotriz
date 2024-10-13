@@ -43,7 +43,7 @@ namespace Manejador
 
         public void Modificar(TextBox Nombre, TextBox ApellidoP, TextBox ApellidoM, DateTimePicker FechaNacimiento, TextBox Rfc, TextBox NombreUsuario, TextBox Clave, ComboBox Rol, int idUsuario)
         {
-            string query = $"CALL p_modificar_usuario({idUsuario}, '{Nombre.Text}', '{ApellidoP.Text}', '{ApellidoM.Text}', '{FechaNacimiento.Value.ToString("yyyy-MM-dd")}', '{Rfc.Text}', '{NombreUsuario.Text}','{Clave.Text}','{Rol.Text}')";
+            string query = $"CALL p_modificar_usuario({idUsuario}, '{Nombre.Text}', '{ApellidoP.Text}', '{ApellidoM.Text}', '{FechaNacimiento.Value.ToString("yyyy-MM-dd")}', '{Rfc.Text}', '{NombreUsuario.Text}','{Sha1(Clave.Text)}','{Rol.Text}')";
             MessageBox.Show(f.Modificar(query), "!Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
