@@ -43,6 +43,31 @@ CREATE TABLE Permisos (
     FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
 );
 
+
+-- -------------------------------------
+
+CREATE TABLE Permisos (
+    idPermiso INT PRIMARY KEY AUTO_INCREMENT,
+    idUsuario INT,
+    idFormulario INT,
+    Lectura BIT DEFAULT 0,
+    Escritura BIT DEFAULT 0,
+    Actualizacion BIT DEFAULT 0,
+    Eliminacion BIT DEFAULT 0,
+    FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario),
+    FOREIGN KEY (idFormulario) REFERENCES Formularios(idFormulario)
+);
+
+
+DROP TABLE permisos;
+
+CREATE TABLE Formularios (
+    idFormulario INT PRIMARY KEY AUTO_INCREMENT,
+    NombreFormulario VARCHAR(255) UNIQUE
+);
+
+
+
 -- --------------------------------------------------------------------------------------
 
 Procedures de la tabla usuarios 
@@ -390,3 +415,11 @@ CALL p_insertar_usuario(
 
 
 SELECT * FROM usuarios;
+
+
+
+
+CREATE DATABASE LIZBETH;
+USE LIZBETH;
+
+

@@ -39,17 +39,17 @@
             // 
             this.dtgvUsuarios.AllowUserToAddRows = false;
             this.dtgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvUsuarios.Location = new System.Drawing.Point(23, 13);
+            this.dtgvUsuarios.Location = new System.Drawing.Point(149, 50);
             this.dtgvUsuarios.Name = "dtgvUsuarios";
             this.dtgvUsuarios.RowHeadersWidth = 62;
-            this.dtgvUsuarios.Size = new System.Drawing.Size(570, 264);
+            this.dtgvUsuarios.Size = new System.Drawing.Size(683, 316);
             this.dtgvUsuarios.TabIndex = 0;
             this.dtgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvUsuarios_CellClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 299);
+            this.label1.Location = new System.Drawing.Point(143, 426);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(118, 33);
             this.label1.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(104, 292);
+            this.txtNombre.Location = new System.Drawing.Point(301, 423);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(421, 41);
             this.txtNombre.TabIndex = 2;
@@ -65,9 +65,9 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(554, 292);
+            this.btnAgregar.Location = new System.Drawing.Point(755, 416);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(39, 30);
+            this.btnAgregar.Size = new System.Drawing.Size(77, 52);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "+";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -77,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 340);
+            this.ClientSize = new System.Drawing.Size(1024, 526);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label1);

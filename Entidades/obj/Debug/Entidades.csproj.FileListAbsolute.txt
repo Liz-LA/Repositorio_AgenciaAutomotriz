@@ -4,3 +4,9 @@ F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.csproj.AssemblyReference.cac
 F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
 F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.dll
 F:\Agencia_Automotriz\Entidades\obj\Debug\Entidades.pdb
+D:\Agencia_Automotriz_NUEVO\Entidades\bin\Debug\Entidades.dll
+D:\Agencia_Automotriz_NUEVO\Entidades\bin\Debug\Entidades.pdb
+D:\Agencia_Automotriz_NUEVO\Entidades\obj\Debug\Entidades.csproj.AssemblyReference.cache
+D:\Agencia_Automotriz_NUEVO\Entidades\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
+D:\Agencia_Automotriz_NUEVO\Entidades\obj\Debug\Entidades.dll
+D:\Agencia_Automotriz_NUEVO\Entidades\obj\Debug\Entidades.pdb
