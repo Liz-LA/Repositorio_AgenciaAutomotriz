@@ -59,8 +59,6 @@ CREATE TABLE Permisos (
 );
 
 
-DROP TABLE permisos;
-
 CREATE TABLE Formularios (
     idFormulario INT PRIMARY KEY AUTO_INCREMENT,
     NombreFormulario VARCHAR(255) UNIQUE
@@ -416,10 +414,21 @@ CALL p_insertar_usuario(
 
 SELECT * FROM usuarios;
 
+SELECT * FROM permisos;
+
 
 
 
 CREATE DATABASE LIZBETH;
 USE LIZBETH;
+
+
+SELECT COUNT(*) 
+FROM Permisos 
+WHERE idUsuario = 1 AND idFormulario = 1;
+
+SELECT COUNT(*) 
+FROM Permisos 
+WHERE idUsuario = @idUsuario AND idFormulario = @idFormulario;
 
 
