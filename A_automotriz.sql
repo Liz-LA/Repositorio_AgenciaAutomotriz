@@ -432,3 +432,9 @@ FROM Permisos
 WHERE idUsuario = @idUsuario AND idFormulario = @idFormulario;
 
 
+SELECT u.NombreUsuario, f.NombreFormulario, p.Lectura, p.Escritura, p.Actualizacion
+FROM Permisos p
+JOIN Usuarios u ON p.idUsuario = u.idUsuario
+JOIN Formularios f ON p.idFormulario = f.idFormulario;
+
+TRUNCATE permisos;
