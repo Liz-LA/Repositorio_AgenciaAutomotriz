@@ -17,12 +17,52 @@ namespace Agencia_Automotriz
 
     public partial class FrmPermisos : Form
     {
-        private string usuarioSeleccionado;
 
+       
+        private string usuarioSeleccionado;
+        ManejadorPermisos mp;
 
         int fila = 0, columna = 0;
         public static string nombre = "", apellidop = "", apellidom = "", rfc = "", clave = "", nombreusuario = "", rol = "", fechanacimiento = "";
         public static int idUsuarios = 0;
+
+
+
+        public bool VerificarPermisosUsuarioActual(string nombreUsuario, string formulario)
+        {
+            foreach (DataGridViewRow row in dgtvPermisos.Rows)
+            {
+                // Verificar que las celdas no sean nulas
+                if (row.Cells["NombreUsuario"].Value != null &&
+                    row.Cells["NombreFormulario"].Value != null)
+                {
+                    // Comparar valores evitando problemas con espacios y mayúsculas
+                    string usuarioFila = row.Cells["NombreUsuario"].Value.ToString().Trim().ToLower();
+                    string formularioFila = row.Cells["NombreFormulario"].Value.ToString().Trim().ToLower();
+
+                    if (usuarioFila == nombreUsuario.Trim().ToLower() &&
+                        formularioFila == formulario.Trim().ToLower())
+                    {
+                        // Obtener los permisos
+                        int lectura = Convert.ToInt32(row.Cells["Lectura"].Value);
+                        int escritura = Convert.ToInt32(row.Cells["Escritura"].Value);
+                        int actualizacion = Convert.ToInt32(row.Cells["Actualizacion"].Value);
+                        int eliminacion = Convert.ToInt32(row.Cells["Eliminacion"].Value);
+
+                        // Verificar si tiene al menos un permiso activo
+                        if (lectura == 1 || escritura == 1 || actualizacion == 1 || eliminacion == 1)
+                        {
+                            return true;  // Tiene permisos, acceso permitido
+                        }
+                    }
+                }
+            }
+
+            // Si no se encontró ningún permiso activo, retorna false
+            return false;
+        }
+
+
 
 
         private void btnGuardarPermisos_Click(object sender, EventArgs e)
@@ -97,8 +137,6 @@ namespace Agencia_Automotriz
 
         }
 
-        ManejadorPermisos mp;
-        
         public FrmPermisos()
         {
             
@@ -107,6 +145,7 @@ namespace Agencia_Automotriz
             mp.MostrarUsuarios(dtgvUsuarios);
             mp.MostrarPermisos(dgtvPermisos);
             dtgvUsuarios.CellClick += dtgvUsuarios_CellClick;
+            
         }
 
         private void dtgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)

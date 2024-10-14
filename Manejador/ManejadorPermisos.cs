@@ -27,23 +27,23 @@ namespace Manejador
         {
             tabla.Columns.Clear();
 
+            // Consulta ajustada para mostrar solo los datos necesarios
             string consulta = @"
-            SELECT 
-            u.NombreUsuario AS Usuario,
-            f.NombreFormulario AS Formulario,
-            p.Lectura,
-            p.Escritura,
-            p.Actualizacion,
-            p.Eliminacion
+            SELECT p.idPermiso,u.NombreUsuario, f.NombreFormulario, 
+             p.Lectura, p.Escritura, p.Actualizacion, p.Eliminacion
             FROM Permisos p
             JOIN Usuarios u ON p.idUsuario = u.idUsuario
-            JOIN Formularios f ON p.idFormulario = f.idFormulario";
+            JOIN Formularios f ON p.idFormulario = f.idFormulario;";
 
+            // Asigna los resultados al DataGridView
             tabla.DataSource = f.Mostrar(consulta, "Permisos").Tables[0];
 
+            // Ajustar tamaño de columnas y filas automáticamente
             tabla.AutoResizeColumns();
             tabla.AutoResizeRows();
         }
+
+
 
         // ----------------------------------------------------------------------------------------------------------
 
@@ -67,56 +67,6 @@ namespace Manejador
 
 
 
-
-
-        public void ActualizarPermisos(int idUsuario, int idFormulario, int lectura, int escritura, int actualizacion, int eliminacion)
-        {
-            // Consulta para actualizar los permisos
-            string consulta = $@"
-            UPDATE Permisos 
-            SET Lectura = {lectura}, 
-            Escritura = {escritura}, 
-            Actualizacion = {actualizacion}, 
-            Eliminacion = {eliminacion}
-            WHERE idUsuario = {idUsuario} AND idFormulario = {idFormulario};";
-
-            string resultado = f.Modificar(consulta);
-
-            Console.WriteLine($"Resultado de la actualización: {resultado}");
-        }
-
-
-        public void GuardarPermisos(int idUsuario, int idFormulario, int lectura, int escritura, int actualizacion, int eliminacion)
-        {
-            string consulta = $@"
-            INSERT INTO Permisos (idUsuario, idFormulario, Lectura, Escritura, Actualizacion, Eliminacion)
-            VALUES ({idUsuario}, {idFormulario}, {lectura}, {escritura}, {actualizacion}, {eliminacion});";
-
-            string resultado = f.Modificar(consulta);
-
-            Console.WriteLine($"Resultado de la inserción: {resultado}");
-        }
-
-        private bool VerificarPermisosExistentes(int idUsuario, int idFormulario)
-        {
-            // Consulta SQL para verificar si ya existen permisos
-            string consulta = $@"
-            SELECT COUNT(*) 
-            FROM Permisos 
-            WHERE idUsuario = {idUsuario} AND idFormulario = {idFormulario};";
-
-            string resultado = f.ObtenerDato(consulta, "Permisos", "COUNT(*)");
-
-            // Verificar y convertir el resultado de forma segura
-            if (int.TryParse(resultado, out int count))
-            {
-                return count > 0; // Retorna true si el conteo es mayor que 0
-            }
-            else
-            {
-                return false; // Si no se puede convertir, asumir que no existen permisos
-            }
-        }
 
 
     }
