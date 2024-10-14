@@ -102,7 +102,6 @@
             this.label5.Size = new System.Drawing.Size(157, 29);
             this.label5.TabIndex = 4;
             this.label5.Text = "Descripcion:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // txtCodigo
             // 

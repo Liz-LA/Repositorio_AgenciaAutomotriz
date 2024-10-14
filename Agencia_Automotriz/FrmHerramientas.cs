@@ -43,11 +43,6 @@ namespace Agencia_Automotriz
             Close();
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtDescripcion_TextChanged(object sender, EventArgs e)
         {
 

@@ -24,44 +24,78 @@ namespace Agencia_Automotriz
 
         int fila = 0, columna = 0;
         public static string nombre = "", apellidop = "", apellidom = "", rfc = "", clave = "", nombreusuario = "", rol = "", fechanacimiento = "";
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnGuardarPermisos_Click_1(object sender, EventArgs e)
+        {
+            // Verificar que hay un usuario seleccionado en el botón
+            if (string.IsNullOrEmpty(btnUsuarioSeleccionado.Text))
+            {
+                MessageBox.Show("Por favor, selecciona un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int idUsuario = ObtenerIdUsuario(btnUsuarioSeleccionado.Text);
+
+            if (idUsuario == -1)
+            {
+                MessageBox.Show("No se encontró el usuario seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Capturar los valores de permisos desde los CheckBoxes
+            int lectura = chkLectura.Checked ? 1 : 0;
+            int escritura = chkEscritura.Checked ? 1 : 0;
+            int actualizacion = chkActualizacion.Checked ? 1 : 0;
+            int eliminacion = chkEliminacion.Checked ? 1 : 0;
+
+            if (chkUsuarios.Checked)
+            {
+                mp.GuardarOActualizarPermisos(idUsuario, 1, lectura, escritura, actualizacion, eliminacion); // idFormulario = 1 para "Usuarios"
+            }
+            if (chkProductos.Checked)
+            {
+                mp.GuardarOActualizarPermisos(idUsuario, 2, lectura, escritura, actualizacion, eliminacion); // idFormulario = 2 para "Productos"
+            }
+            if (chkHerramientas.Checked)
+            {
+                mp.GuardarOActualizarPermisos(idUsuario, 3, lectura, escritura, actualizacion, eliminacion); // idFormulario = 3 para "Herramientas"
+            }
+
+            MessageBox.Show("Permisos guardados correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         public static int idUsuarios = 0;
 
 
-
-        public bool VerificarPermisosUsuarioActual(string nombreUsuario, string formulario)
+        public (bool lectura, bool escritura, bool actualizacion, bool eliminacion) VerificarPermisosUsuarioActual(string nombreUsuario, string formulario)
         {
             foreach (DataGridViewRow row in dgtvPermisos.Rows)
             {
-                // Verificar que las celdas no sean nulas
                 if (row.Cells["NombreUsuario"].Value != null &&
                     row.Cells["NombreFormulario"].Value != null)
                 {
-                    // Comparar valores evitando problemas con espacios y mayúsculas
                     string usuarioFila = row.Cells["NombreUsuario"].Value.ToString().Trim().ToLower();
                     string formularioFila = row.Cells["NombreFormulario"].Value.ToString().Trim().ToLower();
 
                     if (usuarioFila == nombreUsuario.Trim().ToLower() &&
                         formularioFila == formulario.Trim().ToLower())
                     {
-                        // Obtener los permisos
-                        int lectura = Convert.ToInt32(row.Cells["Lectura"].Value);
-                        int escritura = Convert.ToInt32(row.Cells["Escritura"].Value);
-                        int actualizacion = Convert.ToInt32(row.Cells["Actualizacion"].Value);
-                        int eliminacion = Convert.ToInt32(row.Cells["Eliminacion"].Value);
+                        bool lectura = Convert.ToInt32(row.Cells["Lectura"].Value) == 1;
+                        bool escritura = Convert.ToInt32(row.Cells["Escritura"].Value) == 1;
+                        bool actualizacion = Convert.ToInt32(row.Cells["Actualizacion"].Value) == 1;
+                        bool eliminacion = Convert.ToInt32(row.Cells["Eliminacion"].Value) == 1;
 
-                        // Verificar si tiene al menos un permiso activo
-                        if (lectura == 1 || escritura == 1 || actualizacion == 1 || eliminacion == 1)
-                        {
-                            return true;  // Tiene permisos, acceso permitido
-                        }
+                        return (lectura, escritura, actualizacion, eliminacion);
                     }
                 }
             }
-
-            // Si no se encontró ningún permiso activo, retorna false
-            return false;
+            return (false, false, false, false); // Si no se encontró ningún permiso
         }
-
 
 
 

@@ -25,6 +25,12 @@ namespace Agencia_Automotriz
             Close();
 
         }
+        public void ConfigurarBotones(bool permisoAgregar, bool permisoEditar, bool permisoEliminar)
+        {
+            btnAgregar.Enabled = permisoAgregar;
+            btnModificar.Enabled = permisoEditar;
+            btnEliminar.Enabled = permisoEliminar;
+        }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -57,37 +63,7 @@ namespace Agencia_Automotriz
         private void dtgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             fila = e.RowIndex; columna = e.ColumnIndex;
-           /* switch (columna)
-            {
-                case 9:
-                    {
-                        idUsuarios = int.Parse(dtgvUsuarios.Rows[fila].Cells[0].Value.ToString());
-                        mu.Borrar(idUsuarios, dtgvUsuarios.Rows[fila].Cells[1].Value.ToString());
-                        dtgvUsuarios.Visible = false;
-                    }
-                    break;
-                case 10:
-                    {
 
-                        idUsuarios = int.Parse(dtgvUsuarios.Rows[fila].Cells[0].Value.ToString());
-                        nombre = dtgvUsuarios.Rows[fila].Cells[1].Value.ToString();
-                        apellidop = dtgvUsuarios.Rows[fila].Cells[2].Value.ToString();
-                        apellidom = dtgvUsuarios.Rows[fila].Cells[3].Value.ToString();
-                        fechanacimiento = dtgvUsuarios.Rows[fila].Cells[4].Value.ToString();
-                        rfc = dtgvUsuarios.Rows[fila].Cells[5].Value.ToString();
-                        nombreusuario = dtgvUsuarios.Rows[fila].Cells[6].Value.ToString();
-                        clave = dtgvUsuarios.Rows[fila].Cells[7].Value.ToString();
-                        rol = dtgvUsuarios.Rows[fila].Cells[8].Value.ToString();
-                        
-
-
-                        FrmUsuarios au = new FrmUsuarios();
-                        au.ShowDialog();
-                        dtgvUsuarios.Visible = false;
-
-                    }
-                    break;
-            } */
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)

@@ -15,14 +15,13 @@ using Manejador;
 
 namespace Agencia_Automotriz
 {
-    
+
 
     public partial class FrmMenu : Form
     {
         private Entidades.UsuarioPantalla.Usuario usuario;
         ManejadorPermisos mp;
-
-        private FrmPermisos frmPermisos = new FrmPermisos();  // Instancia de FrmPermisos
+        private FrmPermisos frmPermisos = new FrmPermisos();  
 
 
         public FrmMenu(Entidades.UsuarioPantalla.Usuario usuarioAutenticado)
@@ -58,71 +57,71 @@ namespace Agencia_Automotriz
 
         //--------Botones-------------------------------------------
 
-       
+
         private void btnOpUsuarios_Click(object sender, EventArgs e)
         {
+            var permisos = frmPermisos.VerificarPermisosUsuarioActual(usuario.Nombre, "Usuarios");
 
-            if (frmPermisos.VerificarPermisosUsuarioActual(usuario.Nombre, "Usuarios"))
+            FrmAgregarUsuario u = new FrmAgregarUsuario();
+            u.ConfigurarBotones(permisos.escritura, permisos.actualizacion, permisos.eliminacion);
+
+            if (permisos.lectura)
             {
-                FrmAgregarUsuario u = new FrmAgregarUsuario();
                 u.Show();
             }
             else
             {
-                MessageBox.Show("Acceso denegado. No tienes permisos para acceder a Usuarios.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Acceso denegado. No tienes permisos para acceder a Herramientas.",
+                                "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-
-            /*FrmAgregarUsuario u = new FrmAgregarUsuario();
-            u.Show(); */
-
-        }
-
+        } 
 
         private void btnOpProductos_Click(object sender, EventArgs e)
         {
-            if (frmPermisos.VerificarPermisosUsuarioActual(usuario.Nombre, "Productos"))
+            var permisos = frmPermisos.VerificarPermisosUsuarioActual(usuario.Nombre, "Productos");
+
+            FrmAgregarProducto p = new FrmAgregarProducto();
+            p.ConfigurarBotones(permisos.escritura, permisos.actualizacion, permisos.eliminacion);
+
+            if (permisos.lectura)
             {
-                FrmAgregarProducto p = new FrmAgregarProducto();
                 p.Show();
             }
             else
             {
-                MessageBox.Show("Acceso denegado. No tienes permisos para acceder a Productos.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Acceso denegado. No tienes permisos para acceder a Herramientas.",
+                                "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            /*FrmAgregarProducto p = new FrmAgregarProducto();
-            p.Show(); */
-
-        }
+        } 
 
         private void btnOpHerramientas_Click(object sender, EventArgs e)
-        {
-            if (frmPermisos.VerificarPermisosUsuarioActual(usuario.Nombre, "Herramientas"))
             {
-                FrmAgregarHerramienta h = new FrmAgregarHerramienta();
+
+            var permisos = frmPermisos.VerificarPermisosUsuarioActual(usuario.Nombre, "Herramientas");
+
+            FrmAgregarHerramienta h = new FrmAgregarHerramienta();
+            h.ConfigurarBotones(permisos.escritura, permisos.actualizacion, permisos.eliminacion);
+
+            if (permisos.lectura)
+            {
                 h.Show();
             }
             else
             {
-                MessageBox.Show("Acceso denegado. No tienes permisos para acceder a Herramientas.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Acceso denegado. No tienes permisos para acceder a Herramientas.",
+                                "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            /* FrmAgregarHerramienta h = new FrmAgregarHerramienta();
-             h.Show(); */
         }
 
-        private void btnPermisos_Click(object sender, EventArgs e)
-        {
-            FrmPermisos p = new FrmPermisos();
-            p.Show();
+            private void btnPermisos_Click(object sender, EventArgs e)
+            {
+                FrmPermisos p = new FrmPermisos();
+                p.Show();
+            }
+
         }
-
-
-        // ------
-
-
-
-
     }
-}
+

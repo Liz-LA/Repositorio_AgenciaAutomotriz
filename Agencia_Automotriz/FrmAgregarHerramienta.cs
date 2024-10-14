@@ -17,7 +17,13 @@ namespace Agencia_Automotriz
         int fila = 0, columna = 0;
         public static string nombre = "", descripcion = "", marca = "", medida = "";
 
-        
+
+        public void ConfigurarBotones(bool permisoAgregar, bool permisoEditar, bool permisoEliminar)
+        {
+            btnAgregar.Enabled = permisoAgregar;
+            btnModificar.Enabled = permisoEditar;
+            btnEliminar.Enabled = permisoEliminar;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {

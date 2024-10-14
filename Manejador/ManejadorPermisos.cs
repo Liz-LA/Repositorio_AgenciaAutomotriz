@@ -35,17 +35,10 @@ namespace Manejador
             JOIN Usuarios u ON p.idUsuario = u.idUsuario
             JOIN Formularios f ON p.idFormulario = f.idFormulario;";
 
-            // Asigna los resultados al DataGridView
             tabla.DataSource = f.Mostrar(consulta, "Permisos").Tables[0];
-
-            // Ajustar tamaño de columnas y filas automáticamente
             tabla.AutoResizeColumns();
             tabla.AutoResizeRows();
         }
-
-
-
-        // ----------------------------------------------------------------------------------------------------------
 
 
         public void GuardarOActualizarPermisos(int idUsuario, int idFormulario, int lectura, int escritura, int actualizacion, int eliminacion)

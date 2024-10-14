@@ -10,15 +10,11 @@ using static Agencia_Automotriz.FrmMenu;
 namespace Agencia_Automotriz
 {
     public partial class FrmLogin : Form
-    {
-
-        
+    {   
         ManejadorLogin ml;
 
         public FrmLogin()
         {
-
-
             ml = new ManejadorLogin();
             InitializeComponent();
         }
@@ -62,8 +58,6 @@ namespace Agencia_Automotriz
                 
                 MessageBox.Show("Usuario o contraseña incorrectos.");
             }
-
-
 
         }
 

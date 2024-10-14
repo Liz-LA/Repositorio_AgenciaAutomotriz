@@ -21,34 +21,14 @@ namespace Agencia_Automotriz
         private void dtgvProducto_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             fila = e.RowIndex; columna = e.ColumnIndex;
-           /* switch (columna)
-            {
-                case 4:
-                    {
-                        codigobarra = int.Parse(dtgvProducto.Rows[fila].Cells[0].Value.ToString());
-                        mp.Borrar(codigobarra, dtgvProducto.Rows[fila].Cells[1].Value.ToString());
-                        dtgvProducto.Visible = false;
-                    }
-                    break;
-                case 5:
-                    {
 
-                        codigobarra = int.Parse(dtgvProducto.Rows[fila].Cells[0].Value.ToString());
-                        nombre = dtgvProducto.Rows[fila].Cells[1].Value.ToString();
-                        descripcion = dtgvProducto.Rows[fila].Cells[2].Value.ToString();
-                        marca = dtgvProducto.Rows[fila].Cells[3].Value.ToString();
-                       
-
-
-                        FrmProductos ap = new FrmProductos();
-                        ap.ShowDialog();
-                        dtgvProducto.Visible = false;
-
-                    }
-                    break;
-            }*/
         }
-
+        public void ConfigurarBotones(bool permisoAgregar, bool permisoEditar, bool permisoEliminar)
+        {
+            btnAgregar.Enabled = permisoAgregar;
+            btnModificar.Enabled = permisoEditar;
+            btnEliminar.Enabled = permisoEliminar;
+        }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             codigobarra = int.Parse(dtgvProducto.Rows[fila].Cells[0].Value.ToString());
