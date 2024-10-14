@@ -44,9 +44,15 @@ namespace Agencia_Automotriz
             {
                 mu.Guardar(txtNombre,txtApellidoP,txtApellidoM,dtpFecha,txtRfc,txtUser,txtPass,cmbRol);
             }
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
         }

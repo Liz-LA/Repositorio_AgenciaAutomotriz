@@ -73,13 +73,19 @@ namespace Manejador
         public void Mostrar(DataGridView tabla, string filtro)
         {
             tabla.Columns.Clear();
-            tabla.DataSource = f.Mostrar($"select * from Usuarios where nombre like '%{filtro}%'",
-                "Usuarios").Tables[0];
-            tabla.Columns.Insert(9, Boton("Borrar", Color.Red));
-            tabla.Columns.Insert(10, Boton("Modificar", Color.Green));
+
+            // Selecciona todas las columnas excepto "Clave"
+            string consulta = $"SELECT idUsuario, Nombre, Apellidop, Apellidom, Fechadenacimiento, Rfc, NombreUsuario, Rol " +
+                              $"FROM Usuarios WHERE Nombre LIKE '%{filtro}%'";
+
+            // Asigna los datos al DataGridView
+            tabla.DataSource = f.Mostrar(consulta, "Usuarios").Tables[0];
+
+            // Ajusta automáticamente las columnas y filas
             tabla.AutoResizeColumns();
             tabla.AutoResizeRows();
         }
+
 
     }
 }

@@ -63,8 +63,6 @@ namespace Manejador
             tabla.Columns.Clear();
             tabla.DataSource = f.Mostrar($"select * from Productos where nombre like '%{filtro}%'",
                 "Productos").Tables[0];
-            tabla.Columns.Insert(4, Boton("Borrar", Color.Red));
-            tabla.Columns.Insert(5, Boton("Modificar", Color.Green));
             tabla.AutoResizeColumns();
             tabla.AutoResizeRows();
         }

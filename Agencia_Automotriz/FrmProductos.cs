@@ -32,6 +32,7 @@ namespace Agencia_Automotriz
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
+
             if (FrmAgregarProducto.codigobarra > 0)
             {
 
@@ -41,9 +42,17 @@ namespace Agencia_Automotriz
             {
                 mp.Guardar(txtCodigo,txtNombre,txtDescripcion,txtMarca);
             }
+            Close();
+
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
         }

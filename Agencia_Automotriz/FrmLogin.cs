@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using Entidades;  
 using Manejador;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static Agencia_Automotriz.FrmMenu;
 
 
@@ -71,9 +72,9 @@ namespace Agencia_Automotriz
             Application.Exit();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btnSalir_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }

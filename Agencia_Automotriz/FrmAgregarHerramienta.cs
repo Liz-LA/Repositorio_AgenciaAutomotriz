@@ -17,44 +17,53 @@ namespace Agencia_Automotriz
         int fila = 0, columna = 0;
         public static string nombre = "", descripcion = "", marca = "", medida = "";
 
-        private void dtgvHerramienta_CellClick(object sender, DataGridViewCellEventArgs e)
+        
+
+        private void button1_Click(object sender, EventArgs e)
         {
-            fila = e.RowIndex; columna = e.ColumnIndex;
-            switch (columna)
-            {
-                case 5:
-                    {
-                        codigoherramienta = int.Parse(dtgvHerramienta.Rows[fila].Cells[0].Value.ToString());
-                        mh.Borrar(codigoherramienta, dtgvHerramienta.Rows[fila].Cells[1].Value.ToString());
-                        dtgvHerramienta.Visible = false;
-                    }
-                    break;
-                case 6:
-                    {
-
-                        codigoherramienta = int.Parse(dtgvHerramienta.Rows[fila].Cells[0].Value.ToString());
-                        nombre = dtgvHerramienta.Rows[fila].Cells[1].Value.ToString();
-                        medida = dtgvHerramienta.Rows[fila].Cells[2].Value.ToString();
-                        descripcion = dtgvHerramienta.Rows[fila].Cells[2].Value.ToString();
-                        marca = dtgvHerramienta.Rows[fila].Cells[3].Value.ToString();
-
-
-
-                        FrmHerramientas h = new FrmHerramientas();
-                        h.ShowDialog();
-                        dtgvHerramienta.Visible = false;
-
-                    }
-                    break;
-            }
-        }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
+            dtgvHerramienta.Visible = false;
             codigoherramienta = 0; nombre = ""; medida = ""; descripcion = ""; marca = "";
             FrmHerramientas h = new FrmHerramientas();
             h.ShowDialog();
             txtNombre.Focus();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            codigoherramienta = int.Parse(dtgvHerramienta.Rows[fila].Cells[0].Value.ToString());
+            mh.Borrar(codigoherramienta, dtgvHerramienta.Rows[fila].Cells[1].Value.ToString());
+            dtgvHerramienta.Visible = false;
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            dtgvHerramienta.Visible = false;
+            codigoherramienta = int.Parse(dtgvHerramienta.Rows[fila].Cells[0].Value.ToString());
+            nombre = dtgvHerramienta.Rows[fila].Cells[1].Value.ToString();
+            medida = dtgvHerramienta.Rows[fila].Cells[2].Value.ToString();
+            descripcion = dtgvHerramienta.Rows[fila].Cells[2].Value.ToString();
+            marca = dtgvHerramienta.Rows[fila].Cells[3].Value.ToString();
+
+
+
+            FrmHerramientas h = new FrmHerramientas();
+            h.ShowDialog();
+            dtgvHerramienta.Visible = false;
+        }
+
+        private void dtgvHerramienta_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            fila = e.RowIndex; columna = e.ColumnIndex;
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)

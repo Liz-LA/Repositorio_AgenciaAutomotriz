@@ -21,7 +21,7 @@ namespace Agencia_Automotriz
         private void dtgvProducto_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             fila = e.RowIndex; columna = e.ColumnIndex;
-            switch (columna)
+           /* switch (columna)
             {
                 case 4:
                     {
@@ -46,7 +46,55 @@ namespace Agencia_Automotriz
 
                     }
                     break;
-            }
+            }*/
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            codigobarra = int.Parse(dtgvProducto.Rows[fila].Cells[0].Value.ToString());
+            mp.Borrar(codigobarra, dtgvProducto.Rows[fila].Cells[1].Value.ToString());
+            dtgvProducto.Visible = false;
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+
+            dtgvProducto.Visible = false;
+
+            codigobarra = int.Parse(dtgvProducto.Rows[fila].Cells[0].Value.ToString());
+            nombre = dtgvProducto.Rows[fila].Cells[1].Value.ToString();
+            descripcion = dtgvProducto.Rows[fila].Cells[2].Value.ToString();
+            marca = dtgvProducto.Rows[fila].Cells[3].Value.ToString();
+
+
+
+            FrmProductos ap = new FrmProductos();
+            ap.ShowDialog();
+            dtgvProducto.Visible = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dtgvProducto.Visible = false;
+            codigobarra = 0; nombre = ""; descripcion = ""; marca = "";
+            FrmProductos p = new FrmProductos();
+            p.ShowDialog();
+            txtNombre.Focus();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void dtgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            fila = e.RowIndex; columna = e.ColumnIndex;
+        }
+
+        private void dtgvProducto_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            fila = e.RowIndex; columna = e.ColumnIndex;
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)

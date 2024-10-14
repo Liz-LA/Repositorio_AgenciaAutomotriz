@@ -40,6 +40,7 @@ namespace Agencia_Automotriz
             {
                 mh.Guardar(txtCodigo, txtNombre, txtMedida,txtDescripcion, txtMarca);
             }
+            Close();
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -53,6 +54,11 @@ namespace Agencia_Automotriz
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
         }

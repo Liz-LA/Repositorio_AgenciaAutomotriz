@@ -52,8 +52,6 @@ namespace Manejador
             tabla.Columns.Clear();
             tabla.DataSource = f.Mostrar($"select * from Herramientas where nombre like '%{filtro}%'",
                 "Herramientas").Tables[0];
-            tabla.Columns.Insert(5, Boton("Borrar", Color.Red));
-            tabla.Columns.Insert(6, Boton("Modificar", Color.Green));
             tabla.AutoResizeColumns();
             tabla.AutoResizeRows();
         }
